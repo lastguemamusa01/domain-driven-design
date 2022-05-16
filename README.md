@@ -291,8 +291,6 @@ you can do in miro
 
 story - > click buy button 
 
-focus on the warehouse
-
 * start with events
 * what is the activity flows , between those events ordered by events
 * can be parallel processes
@@ -300,8 +298,45 @@ focus on the warehouse
 ![image](https://user-images.githubusercontent.com/25869911/168507893-ccbe40a5-8d7c-48a0-9f88-ede8eb73c3c5.png)
 
 
+* add entities yellow(roles) to each action(blue), aggregates. 
+* context - add context for each entities below
 
- 
+ ![image](https://user-images.githubusercontent.com/25869911/168508891-0979dcf2-8ff3-44af-a763-4ffc5bc99357.png)
+
+* context maps - wharehouse, order processing, finance, store, customer service, shipping context
+* add the entities in the context map and add the interaction lines
+
+context will be classes in the monolith and microservices is service.
+
+
+![image](https://user-images.githubusercontent.com/25869911/168509382-76794280-d7d3-49ce-918d-662134c6525e.png)
+
+entity maps
+
+how do we put jobs of individual entitites into a concise format ?
+
+* relationship between the larger bounded contexts
+* work for individual entitites
+
+CRC card - Classes(services/entities), responsibilities( what reponsibilities do the individual entitites have ?) and collaborators(with whom does the individual entity work ?)
+
+entity maps - entities, what reposabilities have entitites.
+
+slaes clerk 
+* responsability - notify customers of order-processing activities
+
+entity map shows you
+
+* all entities in system
+* relationships by means of event system
+* not as neccesary, if your system is huge or big system
+
+![image](https://user-images.githubusercontent.com/25869911/168509803-2a335d10-03f0-4906-a1be-9c30fb22b069.png)
+
+
+
+
+
 
 
 
