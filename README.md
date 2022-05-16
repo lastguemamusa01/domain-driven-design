@@ -184,6 +184,139 @@ For microservice the modern implementation with DDD:
 microservices, warehouse and store, will be 2 completely different services with databases. 
 Everything stays context specific.
 
+two ways of communication of entities.
+
+easy - orchestration or declarative systems - one entity tells another entity what to do.
+
+services represented as individual entitites
+
+* shopping-cart services tell the billig service with method issueInvoice().
+* shopping-cart services tell the warehouse service with method queueItemForShipping().
+* shopping-cart services tell the email service with method emailCustomer().
+
+this work ok in monolith, not very well in microservices
+
+monolith the method is call, in the microservice the method is network call. 
+for synchronous service, if one of the service is down. this will break
+
+the service call is procedural.
+
+![image](https://user-images.githubusercontent.com/25869911/168503834-e84baf56-616e-4025-a1b3-1a385720fc32.png)
+
+Declarative systems have a tight relationship between services. -> shopping cart services need to know quite bit of warehouse service to use ware house service. like : 
+
+* handle a queue item for shipping request
+* * what arguments to pass ? 
+* what types of arguments ? 
+
+if you make change in the warehouse service, you need to make changes shpping cart services.
+
+* if you make a change to any downstream service, the upstream service will be impected.
+
+Better: Choreography or reactive systems - is a solution to problems with declarative systems. 
+
+use generic ones and asynchronous services
+
+shpping cart service announce the new orderPlaced(), if you interested that do something.
+
+![image](https://user-images.githubusercontent.com/25869911/168504361-1640ef23-0faa-4f7f-850f-9bb5e14bf7f6.png)
+
+Reactive system eliminates coupling relationships between downstream and upstream services.
+
+* can change downstream services without disrupting upstream services.
+* can add downstream services without disrupting upstream services.
+* in DDD, the majority of communication between entitites should be a choreographed/ reactive model.
+
+
+* reactive systems -> also called a publish-subscribe model
+* subscribers are unknown to the publishers.
+* best way to do this is to use a messaging system(kafka, rabbit mq)
+
+* if you are implemeting DDD, go with a reactive model(use messaging system)
+
+
+for DDD design best practice is use Event Storming
+
+
+* Event Storming - tecnique
+    * can be used to analyze the domain/business
+    * can be used to develop code that is modeling the business
+    * collaborative technique with business people
+    * Design a system that models the structure and flow of activities within the business
+    * don't model too much at once
+    * foucs on a specific story
+    * model that part of the system in order to implement that story
+
+
+* 1 - fouc son a specific story
+* 2 - model that part of the system to implement that story
+* 3 - go back and modify previous work to incorporate additional stories.
+
+* an event is something that happens at the business level your customers(domain experts) care about.
+
+event examples :
+
+* order submitted
+* payment received
+* nightly reconciliation completed
+
+event 
+
+* should be specified in past tense
+* something that has happened that will trigger something else to happen
+
+for doing event storming
+
+* use sticky notes
+* decide on domain-level events
+* arrange left to right according to time on the board
+* remember, it's not necessarily linear
+
+color event 
+
+* orange - of interest to the business
+* blue - action - activity - event of orange cause actions 
+* red - questions - things we have to do, not ready to code
+* purple - policy - control how the action plays out. (business rules)
+* yellow - human activities - actions or events with human input. (not always used, not workth using with sticky notes) (you can use aggregatte or entiities in yellow)
+* pink - external systems - occurred from the outside world
+
+event storming shows us
+
+* entire flow of events through a system
+* who is handling those events
+* contexts to which people belong
+
+you can do in miro
+
+story - > click buy button 
+
+focus on the warehouse
+
+* start with events
+* what is the activity flows , between those events ordered by events
+* can be parallel processes
+
+![image](https://user-images.githubusercontent.com/25869911/168507893-ccbe40a5-8d7c-48a0-9f88-ede8eb73c3c5.png)
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
